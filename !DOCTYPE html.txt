@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Especial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container, .password-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            display: inline-block;
+        }
+        button {
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            padding: 15px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .message, .password-container {
+            display: none;
+        }
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="password-container show" id="password-container">
+        <h1>Acceso a Mensaje Especial</h1>
+        <p>Por favor, ingresa la contraseña para continuar.</p>
+        <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="checkPassword()">Entrar</button>
+        <p id="error-message" style="color: red; display: none;">Contraseña incorrecta. Inténtalo de nuevo.</p>
+    </div>
+
+    <div class="container" id="main-content">
+        <h1>¡Hola [Su Nombre]!</h1>
+        <p>Me alegra que hayas llegado hasta aquí. He estado observándote desde que llegaste a este salón, y no sé cómo explicar esto, pero sentí la necesidad de llamar tu atención con algo llamativo.</p>
+        <p>Me encantaría saber si podrías darme la oportunidad de hablar contigo un poco más.</p>
+        <button onclick="showMessage('pregunta')">Ver opciones</button>
+        
+        <div id="pregunta" class="message">
+            <p>¿Puedo decirte algo?</p>
+            <button onclick="showMessage('respuesta')">Sí</button>
+            <button onclick="showMessage('no')">No</button>
+        </div>
+        
+        <div id="respuesta" class="message">
+            <p>¡Genial! Si no es mucha molestia, me gustaría conocerte un poco más. Sería un placer poder hablar contigo y conocerte mejor. ¿Te gustaría darme la oportunidad de hacerlo?</p>
+            <button onclick="showMessage('aceptar')">Sí</button>
+            <button onclick="showMessage('rechazar')">No</button>
+        </div>
+
+        <div id="aceptar" class="message">
+            <p>¡Muchas gracias! Estaré encantado de hablar contigo. ¿Cuándo sería un buen momento para ti?</p>
+        </div>
+
+        <div id="rechazar" class="message">
+            <p>Entiendo, no hay problema. Si alguna vez cambias de opinión, estaré aquí. ¡Que tengas un buen día!</p>
+        </div>
+        
+        <div id="no" class="message">
+            <p>Está bien, entiendo. Si alguna vez decides hablar, estaré aquí. ¡Que tengas un buen día!</p>
+        </div>
+    </div>
+
+    <script>
+        const correctPassword = "nombreDeElla"; // Cambia esto por la contraseña deseada
+
+        function checkPassword() {
+            const inputPassword = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+            
+            if (inputPassword === correctPassword) {
+                document.getElementById('password-container').style.display = 'none';
+                document.getElementById('main-content').style.display = 'inline-block';
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        function showMessage(id) {
+            // Ocultar todos los mensajes
+            var messages = document.querySelectorAll('.message');
+            messages.forEach(function(msg) {
+                msg.style.display = 'none';
+            });
+            // Mostrar el mensaje seleccionado
+            document.getElementById(id).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
